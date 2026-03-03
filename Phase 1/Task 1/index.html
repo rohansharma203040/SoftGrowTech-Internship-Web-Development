@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rajan Mehta — Independent Security Researcher & Bug Bounty Hunter. Hall of Fames at Google, Meta, GitLab, Shopify." />
+  <title>Rajan Mehta · Security Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ░░ NOISE OVERLAY ░░ -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ░░ NAV ░░ -->
+  <nav id="navbar">
+    <div class="nav-brand">
+      <a href="#hero" class="brand-handle">rajan@sec<span class="blink">_</span></a>
+      <span class="brand-status">
+        <span class="dot"></span>available for bounties
+      </span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#findings">findings</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#timeline">timeline</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ░░ HERO ░░ -->
+  <section id="hero">
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <p class="hero-tag">// whoami</p>
+
+      <h1 class="hero-name">
+        <span class="line1">Rajan</span>
+        <span class="line2">Mehta<span class="dot-accent">.</span></span>
+      </h1>
+
+      <p class="hero-role">Security Researcher · Bug Bounty Hunter</p>
+
+      <p class="hero-bio">
+        I find things that shouldn't be there. Mostly IDOR, SSRF, auth-bypass — the kind
+        of bugs that make security teams go quiet for a minute before saying "okay yeah
+        that's critical." Three years on HackerOne and Bugcrowd, 80+ valid reports, and
+        still the most satisfying thing is a <span class="hi-orange">P1 triage response at 2am.</span>
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-n" data-target="80">0</span>
+          <span class="stat-l">Valid Reports</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-n" data-target="14">0</span>
+          <span class="stat-l">Hall of Fames</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-n" data-target="9">0</span>
+          <span class="stat-l">P1 Criticals</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-n" data-target="3">0</span>
+          <span class="stat-l">Years Hunting</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#findings" class="btn-primary">view reports</a>
+        <a href="#contact" class="btn-ghost">ping me</a>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="terminal-box">
+        <div class="term-bar">
+          <div class="term-dots">
+            <i class="td red"></i><i class="td yellow"></i><i class="td green"></i>
+          </div>
+          <span class="term-title">bash — rajan@kali</span>
+        </div>
+        <div class="term-body" id="termBody">
+          <!-- typed by JS -->
+        </div>
+      </div>
+
+      <div class="hof-strip">
+        <p class="hof-label">// recognized by</p>
+        <div class="hof-logos">
+          <span class="hof-badge google">Google VRP</span>
+          <span class="hof-badge meta">Meta</span>
+          <span class="hof-badge gitlab">GitLab</span>
+          <span class="hof-badge shopify">Shopify</span>
+          <span class="hof-badge twitter">Twitter / X</span>
+          <span class="hof-badge apple">Apple</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ ABOUT ░░ -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="about-grid">
+        <div class="about-left">
+          <div class="sec-label">// 01 · about me</div>
+          <h2 class="sec-title">Not a<br><em>pentester-for-hire.</em><br>A hunter.</h2>
+          <div class="about-card">
+            <div class="about-id-row"><span class="id-k">handle</span><span class="id-v">r4j4n_s3c</span></div>
+            <div class="about-id-row"><span class="id-k">platform</span><span class="id-v">HackerOne · Bugcrowd</span></div>
+            <div class="about-id-row"><span class="id-k">rank</span><span class="id-v">Top 500 HackerOne</span></div>
+            <div class="about-id-row"><span class="id-k">base</span><span class="id-v">Bangalore, India</span></div>
+            <div class="about-id-row"><span class="id-k">pgp</span><span class="id-v">0xB34F91E2</span></div>
+            <div class="about-id-row"><span class="id-k">signal</span><span class="id-v">on request</span></div>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <p>
+            Started in 2021 after my college's network lab gave me too much unsupervised time
+            and a Kali VM. First bug was a classic — IDOR on a food delivery startup,
+            leaking every user's address and order history. They gave me ₹5000 and a
+            "thanks for your responsible disclosure." I was hooked.
+          </p>
+          <p>
+            My focus is web application security — mainly auth flaws, business logic,
+            SSRF, and anything cloud-adjacent. I also do a fair bit of
+            <span class="hi-orange">network recon and subdomain takeover</span> work since
+            most programs still have embarrassingly large attack surfaces sitting
+            there unmonitored.
+          </p>
+          <p>
+            I'm not a full-time hunter — I have a day job in infosec — but I spend
+            most evenings poking at scopes I find interesting. I write up my better
+            finds on my blog when I get around to it. I've been meaning to publish the
+            GitLab one for six months now.
+          </p>
+          <div class="about-certs">
+            <span class="cert">eWPTXv2</span>
+            <span class="cert">OSCP</span>
+            <span class="cert">CompTIA PenTest+</span>
+            <span class="cert">AWS Security Specialty</span>
+            <span class="cert">CEH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FINDINGS ░░ -->
+  <section id="findings">
+    <div class="section-wrap">
+      <div class="sec-label">// 02 · notable findings</div>
+      <div class="findings-header">
+        <h2 class="sec-title">Things I've<br><em>broken.</em></h2>
+        <p class="findings-sub">
+          Selected reports — redacted where programs request confidentiality.
+          Full details available via HackerOne profile.
+        </p>
+      </div>
+
+      <div class="findings-list">
+
+        <div class="finding-card reveal" data-sev="critical">
+          <div class="finding-meta">
+            <span class="sev-badge critical">P1 · Critical</span>
+            <span class="finding-date">Aug 2024</span>
+            <span class="finding-prog">Shopify</span>
+          </div>
+          <h3 class="finding-title">SSRF via webhook URL validation bypass → internal metadata exposure</h3>
+          <p class="finding-desc">
+            Webhook endpoint performed URL validation client-side only. By sending a
+            redirect chain through a controlled server, I was able to make Shopify's
+            backend hit <code>169.254.169.254</code> (AWS IMDS) and return
+            temporary IAM credentials in the webhook response body. Reported, triaged
+            as critical within 6 hours. Fixed in 3 days.
+          </p>
+          <div class="finding-tags">
+            <span>SSRF</span><span>AWS IMDS</span><span>WAF bypass</span><span>redirect chain</span>
+          </div>
+          <div class="finding-reward">
+            <span class="reward-label">bounty</span>
+            <span class="reward-val">$4,500</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal" data-sev="high">
+          <div class="finding-meta">
+            <span class="sev-badge high">P2 · High</span>
+            <span class="finding-date">Mar 2024</span>
+            <span class="finding-prog">GitLab</span>
+          </div>
+          <h3 class="finding-title">IDOR in project export API allowing cross-namespace repository dump</h3>
+          <p class="finding-desc">
+            The <code>/api/v4/projects/:id/export/download</code> endpoint
+            validated group membership but not project-level visibility overrides.
+            An attacker with any valid GitLab account could enumerate private project
+            IDs and download full repo archives including CI/CD secrets stored in
+            <code>.gitlab-ci.yml</code>. Affects self-hosted and gitlab.com.
+          </p>
+          <div class="finding-tags">
+            <span>IDOR</span><span>broken auth</span><span>CI/CD secrets</span>
+          </div>
+          <div class="finding-reward">
+            <span class="reward-label">bounty</span>
+            <span class="reward-val">$2,800</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal" data-sev="high">
+          <div class="finding-meta">
+            <span class="sev-badge high">P2 · High</span>
+            <span class="finding-date">Nov 2023</span>
+            <span class="finding-prog">Meta (Facebook)</span>
+          </div>
+          <h3 class="finding-title">Auth token reuse across Facebook Business Manager sub-accounts</h3>
+          <p class="finding-desc">
+            Long-lived access tokens issued to Business Manager apps were not scoped
+            per ad-account. A token from account A could be replayed against account B's
+            ad management API if the underlying user had ever had permissions on both.
+            Exposed campaign data, spend history, and audience targeting of competing brands.
+          </p>
+          <div class="finding-tags">
+            <span>broken access control</span><span>token misuse</span><span>auth logic</span>
+          </div>
+          <div class="finding-reward">
+            <span class="reward-label">bounty</span>
+            <span class="reward-val">$3,000</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal" data-sev="medium">
+          <div class="finding-meta">
+            <span class="sev-badge medium">P3 · Medium</span>
+            <span class="finding-date">Jul 2023</span>
+            <span class="finding-prog">Google VRP</span>
+          </div>
+          <h3 class="finding-title">Subdomain takeover on *.google-analytics.com via orphaned Cloud Storage bucket</h3>
+          <p class="finding-desc">
+            Found an unclaimed GCS bucket being referenced by a CNAME on a
+            google-analytics.com subdomain during passive recon. Claimed the bucket
+            and demonstrated full content control. Not weaponisable for credential theft
+            due to SameSite policies but still a brand/trust issue. HoF + swag.
+          </p>
+          <div class="finding-tags">
+            <span>subdomain takeover</span><span>GCS</span><span>recon</span>
+          </div>
+          <div class="finding-reward">
+            <span class="reward-label">reward</span>
+            <span class="reward-val">HoF + swag</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal" data-sev="critical">
+          <div class="finding-meta">
+            <span class="sev-badge critical">P1 · Critical</span>
+            <span class="finding-date">Feb 2023</span>
+            <span class="finding-prog">[Confidential]</span>
+          </div>
+          <h3 class="finding-title">Pre-auth RCE in internal build system via unsafe deserialization</h3>
+          <p class="finding-desc">
+            Program name redacted per disclosure agreement. Build orchestration
+            service exposed a debug endpoint accepting serialized Java objects.
+            Sent a crafted ysoserial CommonsCollections payload, got RCE on the
+            build host — which had network access to prod deploy keys. Full write-up
+            pending NDA expiry in Q3 2025.
+          </p>
+          <div class="finding-tags">
+            <span>RCE</span><span>deserialization</span><span>pre-auth</span><span>Java</span>
+          </div>
+          <div class="finding-reward">
+            <span class="reward-label">bounty</span>
+            <span class="reward-val">$12,000</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SKILLS ░░ -->
+  <section id="skills">
+    <div class="section-wrap">
+      <div class="sec-label">// 03 · skill set</div>
+      <h2 class="sec-title">What I actually<br><em>use.</em></h2>
+
+      <div class="skills-grid">
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">⚡</span>
+            <span class="skill-name">Web App Pentesting</span>
+          </div>
+          <p class="skill-desc">
+            OWASP Top 10 is the floor, not the ceiling. I focus heavily on
+            business-logic flaws and second-order issues that scanners miss entirely.
+          </p>
+          <ul class="skill-tools">
+            <li>Burp Suite Pro</li>
+            <li>ffuf / feroxbuster</li>
+            <li>sqlmap</li>
+            <li>Caido</li>
+            <li>nuclei</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="94"></div></div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">🌐</span>
+            <span class="skill-name">Network Security</span>
+          </div>
+          <p class="skill-desc">
+            Protocol-level analysis, lateral movement, pivoting through badly
+            segmented internal networks. Love a good nmap scan output.
+          </p>
+          <ul class="skill-tools">
+            <li>nmap / masscan</li>
+            <li>Wireshark</li>
+            <li>Responder</li>
+            <li>Impacket</li>
+            <li>CrackMapExec</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">🔬</span>
+            <span class="skill-name">Malware / RE</span>
+          </div>
+          <p class="skill-desc">
+            Static and dynamic analysis, mostly for samples I find during recon on
+            compromised hosts or phishing infrastructure. Ghidra is underrated.
+          </p>
+          <ul class="skill-tools">
+            <li>Ghidra</li>
+            <li>x64dbg</li>
+            <li>CAPE Sandbox</li>
+            <li>YARA rules</li>
+            <li>dnSpy</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="76"></div></div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">☁️</span>
+            <span class="skill-name">Cloud Security</span>
+          </div>
+          <p class="skill-desc">
+            AWS is where most programs have their worst misconfigs — overly permissive
+            IAM, public S3, IMDS v1 still enabled. Pacu makes the enumeration painless.
+          </p>
+          <ul class="skill-tools">
+            <li>Pacu</li>
+            <li>ScoutSuite</li>
+            <li>aws-cli</li>
+            <li>CloudMapper</li>
+            <li>Prowler</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">🔍</span>
+            <span class="skill-name">Recon & OSINT</span>
+          </div>
+          <p class="skill-desc">
+            Good recon is half the bug. I run automated pipelines overnight —
+            Amass, subfinder, httpx — and review manually in the morning for
+            interesting assets.
+          </p>
+          <ul class="skill-tools">
+            <li>Amass / subfinder</li>
+            <li>Shodan / Censys</li>
+            <li>httpx / gau</li>
+            <li>theHarvester</li>
+            <li>Google dorks</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="91"></div></div>
+        </div>
+
+        <div class="skill-block reveal">
+          <div class="skill-block-head">
+            <span class="skill-ico">🐍</span>
+            <span class="skill-name">Scripting & Automation</span>
+          </div>
+          <p class="skill-desc">
+            Python for custom exploit scripts and recon automation. Bash for gluing
+            tools together. Go occasionally when I need something fast.
+            I am not a developer and I don't pretend to be.
+          </p>
+          <ul class="skill-tools">
+            <li>Python 3</li>
+            <li>Bash</li>
+            <li>Go (basics)</li>
+            <li>requests / pwntools</li>
+            <li>Git</li>
+          </ul>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-w="79"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ TIMELINE ░░ -->
+  <section id="timeline">
+    <div class="section-wrap">
+      <div class="sec-label">// 04 · timeline</div>
+      <h2 class="sec-title">How I got<br><em>here.</em></h2>
+
+      <div class="tl-list">
+
+        <div class="tl-item reveal">
+          <div class="tl-marker"></div>
+          <div class="tl-date">2021</div>
+          <div class="tl-body">
+            <h3 class="tl-title">First valid bug — IDOR on a food-delivery startup</h3>
+            <p class="tl-text">
+              Found it in my college network lab by accident. Their mobile API
+              used sequential integer IDs for order lookups with zero auth check.
+              Could see every user's name, address, and past orders by incrementing
+              <code>/api/orders/&lt;id&gt;</code>. Got ₹5,000 and a thank-you email.
+              Created my HackerOne account the same night.
+            </p>
+            <span class="tl-tag">first blood</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-marker"></div>
+          <div class="tl-date">2022</div>
+          <div class="tl-body">
+            <h3 class="tl-title">Passed OSCP — 73.5 hours, 4 machines + AD set</h3>
+            <p class="tl-text">
+              Took three months of prep, failed the AD set on my first attempt,
+              came back and got it. The exam environment is genuinely stressful
+              in a way that CTFs aren't. Taught me to document as I go rather
+              than scrambling at the end.
+            </p>
+            <span class="tl-tag">certification</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-marker"></div>
+          <div class="tl-date">2022</div>
+          <div class="tl-body">
+            <h3 class="tl-title">Joined Bugcrowd — first private program invite</h3>
+            <p class="tl-text">
+              Got invited to a fintech private program after a few public reports.
+              Private programs are a different game — smaller scope, more focus,
+              and companies that actually pay fast. Found an auth bypass in their
+              password reset flow (race condition + predictable token) for $1,200.
+            </p>
+            <span class="tl-tag">milestone</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-marker"></div>
+          <div class="tl-date">2023</div>
+          <div class="tl-body">
+            <h3 class="tl-title">Google VRP Hall of Fame + Meta recognition</h3>
+            <p class="tl-text">
+              Two HoF entries in the same quarter. The Google one was a subdomain
+              takeover (boring but valid). The Meta one was a token-reuse issue
+              that I almost didn't report because I wasn't sure if it was in scope.
+              It was. Always report, let the program decide.
+            </p>
+            <span class="tl-tag">hall of fame</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-marker"></div>
+          <div class="tl-date">2024</div>
+          <div class="tl-body">
+            <h3 class="tl-title">Best year — $22,000+ in bounties, P1 at Shopify</h3>
+            <p class="tl-text">
+              The Shopify SSRF was the highlight. Also picked up a pre-auth RCE on a
+              confidential program that I can't name yet — that one's still my best
+              technical find. Crossed Top 500 on HackerOne. Started mentoring two
+              newer hunters informally.
+            </p>
+            <span class="tl-tag">best year</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-marker active"></div>
+          <div class="tl-date">2025</div>
+          <div class="tl-body">
+            <h3 class="tl-title">Expanding into cloud-native & AI/LLM attack surface</h3>
+            <p class="tl-text">
+              A lot of programs are deploying LLM features fast and thinking about
+              security second. Prompt injection, insecure RAG pipelines, model
+              exfiltration via tool calls — it's a genuinely interesting new attack
+              surface. Wrote a nuclei template for exposed LLM debug endpoints
+              that's been forked a few times.
+            </p>
+            <span class="tl-tag orange">current focus</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CONTACT ░░ -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="contact-inner">
+        <div class="sec-label">// 05 · contact</div>
+        <h2 class="sec-title contact-title">
+          Got a scope?<br><em>Let's talk.</em>
+        </h2>
+        <p class="contact-note">
+          I'm open to private program invites, short-term pentest engagements, and
+          the occasional interesting side project. Not looking for full-time roles
+          right now. PGP preferred for anything sensitive.
+        </p>
+
+        <div class="contact-channels">
+          <a href="mailto:rajan.mehta.sec@proton.me" class="channel-card">
+            <span class="ch-icon">✉</span>
+            <span class="ch-label">email</span>
+            <span class="ch-val">rajan.mehta.sec@proton.me</span>
+          </a>
+          <a href="#" class="channel-card">
+            <span class="ch-icon">🔐</span>
+            <span class="ch-label">hackerone</span>
+            <span class="ch-val">hackerone.com/r4j4n_s3c</span>
+          </a>
+          <a href="#" class="channel-card">
+            <span class="ch-icon">🐛</span>
+            <span class="ch-label">bugcrowd</span>
+            <span class="ch-val">bugcrowd.com/r4j4n</span>
+          </a>
+          <a href="#" class="channel-card">
+            <span class="ch-icon">🐙</span>
+            <span class="ch-label">github</span>
+            <span class="ch-val">github.com/r4j4n-sec</span>
+          </a>
+        </div>
+
+        <div class="pgp-box">
+          <p class="pgp-label">// PGP fingerprint</p>
+          <code class="pgp-fp">A1B2 C3D4 E5F6 7890 1A2B · 3C4D 5E6F 7080 B34F 91E2</code>
+          <a href="#" class="pgp-link">fetch public key ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">rajan@sec:~$</span>
+      <span class="footer-note">hand-coded · no templates · definitely not a wordpress site</span>
+      <span class="footer-year">© 2025</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
