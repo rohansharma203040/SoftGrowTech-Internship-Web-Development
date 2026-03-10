@@ -1,0 +1,517 @@
+/* ── RESET & ROOT ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:        #1a1208;
+  --surface:   #231a0e;
+  --card:      #2e2010;
+  --border:    #4a3218;
+  --amber:     #e8a020;
+  --amber-dim: #a06a10;
+  --cream:     #f0e6cc;
+  --muted:     #8a7055;
+  --red:       #c04030;
+  --green:     #5a9040;
+}
+
+/* ── BODY ── */
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'IBM Plex Mono', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(232,160,32,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 70%, rgba(192,64,48,0.05) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── LAYOUT WRAPPER ── */
+.wrapper {
+  width: 100%;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(232,160,32,0.08);
+}
+
+/* ───────────────────────────────────────────
+   LEFT PANEL — Player
+─────────────────────────────────────────── */
+.player-panel {
+  background: var(--surface);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+/* Amber top line accent */
+.player-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  opacity: 0.6;
+}
+
+/* Brand label */
+.brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--amber-dim);
+  text-transform: uppercase;
+}
+
+/* ── VINYL RECORD ── */
+.vinyl-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.vinyl {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #2a2a2a 0%, #111 60%, #0a0a0a 100%);
+  position: relative;
+  box-shadow:
+    0 0 0 2px #333,
+    0 0 0 3px #222,
+    0 12px 40px rgba(0,0,0,0.7),
+    inset 0 2px 4px rgba(255,255,255,0.04);
+  transition: transform 0.4s ease;
+}
+
+.vinyl.spinning {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Vinyl grooves texture */
+.vinyl::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent 0px,
+    transparent 3px,
+    rgba(255,255,255,0.015) 3px,
+    rgba(255,255,255,0.015) 4px
+  );
+}
+
+/* Center label sticker */
+.vinyl-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.vinyl-label-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #1a1208;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.vinyl-hole {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  margin-top: 2px;
+}
+
+/* ── NOW PLAYING INFO ── */
+.now-playing {
+  text-align: center;
+}
+
+.track-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--card);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber-dim), var(--amber));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.5s linear;
+  position: relative;
+}
+
+/* Scrubber dot at end of fill */
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -4px; top: -3px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(232,160,32,0.6);
+}
+
+/* ── PLAYBACK CONTROLS ── */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.ctrl-btn:hover {
+  color: var(--cream);
+  transform: scale(1.1);
+}
+
+.ctrl-btn:active {
+  transform: scale(0.95);
+}
+
+/* Big play/pause button */
+.ctrl-btn.main {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--bg);
+  box-shadow: 0 0 20px rgba(232,160,32,0.3);
+}
+
+.ctrl-btn.main:hover {
+  background: #f0b030;
+  box-shadow: 0 0 28px rgba(232,160,32,0.5);
+  color: var(--bg);
+  transform: scale(1.05);
+}
+
+svg {
+  display: block;
+}
+
+/* ── VOLUME CONTROL ── */
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vol-icon {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 3px;
+  background: var(--card);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--amber);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(232,160,32,0.4);
+  transition: transform 0.15s;
+}
+
+.vol-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.vol-pct {
+  font-size: 10px;
+  color: var(--muted);
+  width: 30px;
+  text-align: right;
+}
+
+/* ───────────────────────────────────────────
+   RIGHT PANEL — Playlist
+─────────────────────────────────────────── */
+.playlist-panel {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.playlist-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+}
+
+.playlist-count {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* Column headers */
+.playlist-cols {
+  display: grid;
+  grid-template-columns: 28px 1fr 80px 48px;
+  padding: 8px 24px;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(74,50,24,0.4);
+}
+
+/* Scrollable list */
+.playlist-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.playlist-body::-webkit-scrollbar { width: 4px; }
+.playlist-body::-webkit-scrollbar-track { background: transparent; }
+.playlist-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── SONG ROW ── */
+.song-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 80px 48px;
+  padding: 13px 24px;
+  border-bottom: 1px solid rgba(74,50,24,0.2);
+  cursor: pointer;
+  align-items: center;
+  transition: background 0.15s;
+  position: relative;
+}
+
+.song-row:hover {
+  background: rgba(232,160,32,0.04);
+}
+
+.song-row.active {
+  background: rgba(232,160,32,0.07);
+}
+
+/* Amber left accent on active row */
+.song-row.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--amber);
+}
+
+/* Track number */
+.song-num {
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.song-row.active .song-num {
+  color: var(--amber);
+}
+
+/* Song title + artist */
+.song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.song-name {
+  font-size: 12px;
+  color: var(--cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.song-row.active .song-name {
+  color: var(--amber);
+}
+
+.song-artist {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Genre tag */
+.song-genre {
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+/* Duration */
+.song-dur {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── ANIMATED EQ BARS (active track indicator) ── */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.bar {
+  width: 3px;
+  background: var(--amber);
+  border-radius: 1px;
+  animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(2) { animation-delay: 0.15s; }
+.bar:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes bounce {
+  from { height: 3px; }
+  to   { height: 14px; }
+}
+
+/* ── STATUS BAR ── */
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-bar {
+  padding: 10px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+  }
+
+  .player-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .playlist-panel {
+    max-height: 360px;
+  }
+}

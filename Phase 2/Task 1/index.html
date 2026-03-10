@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Groove — Music Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- LEFT: Player -->
+  <div class="player-panel">
+    <div class="brand">Groove &mdash; v1.0</div>
+
+    <div class="vinyl-wrap">
+      <div class="vinyl" id="vinyl">
+        <div class="vinyl-label">
+          <div class="vinyl-label-text">GROOVE<br>RECORDS</div>
+          <div class="vinyl-hole"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="now-playing">
+      <div class="track-title" id="trackTitle">Select a track</div>
+      <div class="track-artist" id="trackArtist">&mdash;</div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="time-row">
+        <span id="timeCurrent">0:00</span>
+        <span id="timeTotal">0:00</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btnPrev" title="Previous">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="19 20 9 12 19 4 19 20"/>
+          <line x1="5" y1="19" x2="5" y2="5"/>
+        </svg>
+      </button>
+
+      <button class="ctrl-btn main" id="btnPlay" title="Play/Pause">
+        <svg id="iconPlay" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <svg id="iconPause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+          <rect x="6" y="4" width="4" height="16" rx="1"/>
+          <rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+      </button>
+
+      <button class="ctrl-btn" id="btnNext" title="Next">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 4 15 12 5 20 5 4"/>
+          <line x1="19" y1="5" x2="19" y2="19"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="volume-row">
+      <svg class="vol-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      </svg>
+      <input class="vol-slider" type="range" id="volSlider" min="0" max="100" value="75"/>
+      <span class="vol-pct" id="volPct">75%</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: Playlist -->
+  <div class="playlist-panel">
+    <div class="playlist-header">
+      <span class="playlist-title">Playlist</span>
+      <span class="playlist-count" id="playlistCount">8 tracks</span>
+    </div>
+    <div class="playlist-cols">
+      <span>#</span>
+      <span>Track / Artist</span>
+      <span>Genre</span>
+      <span style="text-align:right">Time</span>
+    </div>
+    <div class="playlist-body" id="playlistBody"></div>
+    <div class="status-bar">
+      <span class="status-dot" id="statusDot" style="background:#4a3218;box-shadow:none"></span>
+      <span id="statusText">No track playing</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
